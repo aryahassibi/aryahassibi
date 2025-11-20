@@ -1,4 +1,8 @@
-## Hi there 👋
+<!-- ## Hi there 👋 -->
+
+<p align="center">
+  <img src="assets/spinning_oval.gif"  alt="Spinning Oval Animation"/>
+</p>
 
 <!--
 **aryahassibi/aryahassibi** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
