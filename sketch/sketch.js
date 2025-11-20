@@ -1,8 +1,8 @@
 let pg;
 let angle = 0;
 
-// --- GIF capture settings ---
-const DO_CAPTURE_GIF = true; // <<< set to true to record a GIF
+// --- Image capture settings ---
+const DO_CAPTURE_IMG = false; // <<< set to true to record a GIF
 const TOTAL_FRAMES = 10; // how many frames to record
 
 // I recommend running a local server to download the framews easier (e.g. python -m http.server)
@@ -17,7 +17,7 @@ function setup() {
 }
 
 function draw() {
-    if (DO_CAPTURE_GIF) {
+    if (DO_CAPTURE_IMG) {
         frameRate(5);
     }
 
@@ -45,7 +45,7 @@ function draw() {
     angle = 4 * PI * (t / TOTAL_FRAMES);
 
     // --- GIF capture logic
-    if (DO_CAPTURE_GIF) {
+    if (DO_CAPTURE_IMG) {
         if (frameCount <= TOTAL_FRAMES) {
             saveCanvas("frame-" + nf(frameCount, 4), "png");
         } else {
