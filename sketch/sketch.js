@@ -3,7 +3,7 @@ let angle = 0;
 
 // --- Image capture settings ---
 const DO_CAPTURE_IMG = false; // <<< set to true to record a GIF
-const TOTAL_FRAMES = 10; // how many frames to record
+const TOTAL_FRAMES = 250; // how many frames to record
 
 // I recommend running a local server to download the framews easier (e.g. python -m http.server)
 
