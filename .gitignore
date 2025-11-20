@@ -1,0 +1,10 @@
+
+sketch/CCapture.all.min.js
+sketch/download.js
+sketch/webm-writer-0.2.0.js
+sketch/gif.worker.js
+sketch/output_images/
+
+venv/
+
+.DS_Store
