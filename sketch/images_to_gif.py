@@ -6,6 +6,7 @@ import glob
 
 INPUT_PATTERN = "./output_images/frame-*.png"  # your frames: frame-0001.png, etc.
 OUTPUT_GIF = "spinning_oval_optimized.gif"
+OUTPUT_WEBP = "spinning_oval_optimized.webp"
 
 TRIM_HEIGHT = 150      # 600 - 150 * 2 = 300
 MAX_WIDTH = 600       # downscale from 1200 -> 600 (keeps aspect ratio)
@@ -54,5 +55,19 @@ frames[0].save(
     optimize=True,
     disposal=2,  # clear frame before drawing the next
 )
-
 print("GIF saved.")
+
+
+# Takes some time 
+print(f"Saving WebP to {OUTPUT_WEBP}")
+frames[0].save(
+    OUTPUT_WEBP,
+    save_all=True,
+    append_images=frames[1:],
+    duration=duration_ms,
+    loop=0,
+    format="WEBP",
+    quality=80,     # lower for smaller file
+    method=6,       # better compression
+)
+print("WebP saved.")
