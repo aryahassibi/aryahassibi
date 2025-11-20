@@ -8,12 +8,12 @@ const TOTAL_FRAMES = 250; // how many frames to record
 // I recommend running a local server to download the framews easier (e.g. python -m http.server)
 
 function setup() {
-    createCanvas(600, 300, WEBGL);
+    createCanvas(400, 150, WEBGL);
     setAttributes("alpha", true); // alpha channel for transparent background
 
-    // Offscreen graphics for the oval texture
+    // Offscreen graphics for the ring texture
     pg = createGraphics(512, 256);
-    drawMetalTextureWithText();
+    drawRingWithText();
 }
 
 function draw() {
@@ -32,11 +32,11 @@ function draw() {
     pointLight(255, 255, 255, 200, -200, 300);
 
     // Camera & rotation
-    rotateX(cos(angle * 0.5) * 0.1);
-    rotateZ(cos(-angle * 0.5) * 0.15);
+    rotateX(cos(angle * 0.5) * 0.2);
+    rotateZ(sin(-angle * 0.5) * 0.2);
     rotateY(-angle * 0.5);
 
-    // Apply the texture and draw an ellipsoid/oval
+    // Apply the texture and draw an ellipsoid/ring
     noStroke();
     texture(pg);
     ellipsoid(150, 50, 150, 64, 48);
@@ -54,26 +54,20 @@ function draw() {
     }
 }
 
-function drawMetalTextureWithText() {
+function drawRingWithText() {
     pg.push();
     pg.clear();
-    pg.background(40);
 
-    // Vertical stripes
-    for (let x = 0; x < pg.width; x++) {
-        const t = x / pg.width;
-        const base = 150 + 80 * sin(t * TWO_PI * 6); // wavy brightness
-        pg.stroke(base);
-        pg.line(x, 0, x, pg.height);
-    }
-
-    // Horizontal dark bands
+    // Horizontal white bands
     pg.noStroke();
-    for (let y = 0; y < pg.height; y += 5) {
-        const alpha = 40;
-        pg.fill(0, alpha);
+    for (let y = 0; y < pg.height; y += 19.5) {
+        pg.fill(255, 100);
         pg.rect(0, y, pg.width, 3);
     }
+    
+    // Blue Ring
+    pg.fill(0 ,30, 250);
+    pg.rect(0, pg.height/2 - 25, pg.width, 50);
 
     // Text settings
     pg.textAlign(CENTER, CENTER);

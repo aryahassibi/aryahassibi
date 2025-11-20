@@ -5,11 +5,10 @@ import glob
 
 
 INPUT_PATTERN = "./output_images/frame-*.png"  # your frames: frame-0001.png, etc.
-OUTPUT_GIF = "spinning_oval_optimized.gif"
-OUTPUT_WEBP = "spinning_oval_optimized.webp"
+OUTPUT_GIF = "./animated_output/spinning_ring_optimized.gif"
+OUTPUT_WEBP = "./animated_output/spinning_ring_optimized.webp"
 
-TRIM_HEIGHT = 150      # 600 - 150 * 2 = 300
-MAX_WIDTH = 600       # downscale from 1200 -> 600 (keeps aspect ratio)
+MAX_WIDTH = 400       # downscale from 1200 -> 600 (keeps aspect ratio)
 FRAME_STEP = 2        # 1 = use all frames, 2 = every other frame, 3 = every third...
 FPS = 36              # playback fps
 LOOP_FOREVER = True   # loop = 0 for infinite
@@ -30,7 +29,6 @@ frames = []
 for f in files:
     img = Image.open(f).convert("RGBA")
     w, h = img.size
-    img = img.crop((0, TRIM_HEIGHT, w, h-TRIM_HEIGHT))
 
     # Downscale
     if img.width > MAX_WIDTH:
