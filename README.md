@@ -1,7 +1,7 @@
 <!-- ## Hi there 👋 -->
 
 <p align="center">
-  <img src="assets/spinning_oval.gif"  alt="Spinning Oval Animation"/>
+  <img src="assets/spinning_oval_optimized.gif"  alt="Spinning Oval Animation"/>
 </p>
 
 <!--
