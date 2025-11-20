@@ -1,45 +1,25 @@
 let pg;
 let angle = 0;
 
-// From https://github.com/spite/ccapture.js/ downloaded:
-//     CCapture.all.min.js
-//     gif.worker.js
-//     webm-writer.js
-//     download.js
-// and placed in the sketch/ folder
-// Run a local server e.g. python -m http.server
-
 // --- GIF capture settings ---
-const DO_CAPTURE_GIF = false;                   // <<< set to true to record a GIF
-const TOTAL_FRAMES = 250;                       // how many frames to record
-let capturer;
-let recordingStarted = false;
-let recordedFrames = 0;
-let canvasElm;
+const DO_CAPTURE_GIF = true; // <<< set to true to record a GIF
+const TOTAL_FRAMES = 10; // how many frames to record
+
+// I recommend running a local server to download the framews easier (e.g. python -m http.server)
 
 function setup() {
-
-    const canvas = createCanvas(600, 300, WEBGL);
+    createCanvas(600, 300, WEBGL);
     setAttributes("alpha", true); // alpha channel for transparent background
-    canvasElm = canvas.elt;
 
     // Offscreen graphics for the oval texture
     pg = createGraphics(512, 256);
     drawMetalTextureWithText();
-
-    if (DO_CAPTURE_GIF) {
-        // CCapture: set up GIF recording
-        capturer = new CCapture({
-            format: "gif",
-            workersPath: "./",
-            framerate: 30,
-            verbose: true,
-            transparent: true, // some builds support transparent export
-        });
-    }
 }
 
 function draw() {
+    if (DO_CAPTURE_GIF) {
+        frameRate(5);
+    }
 
     const t = frameCount % TOTAL_FRAMES;
 
@@ -64,19 +44,12 @@ function draw() {
     // angle += 0.02;
     angle = 4 * PI * (t / TOTAL_FRAMES);
 
-    // --- GIF capture logic 
+    // --- GIF capture logic
     if (DO_CAPTURE_GIF) {
-        if (!recordingStarted) {
-            capturer.start();
-            recordingStarted = true;
-        }
-        capturer.capture(canvasElm);
-        recordedFrames++;
-
-        if (recordedFrames >= TOTAL_FRAMES) {
-            noLoop(); 
-            capturer.stop();
-            capturer.save();
+        if (frameCount <= TOTAL_FRAMES) {
+            saveCanvas("frame-" + nf(frameCount, 4), "png");
+        } else {
+            noLoop();
         }
     }
 }
